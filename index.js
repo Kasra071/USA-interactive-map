@@ -10,10 +10,78 @@ if(!ListsData){
     localStorage.setItem('ListData',JSON.stringify(EmptyJsonData))
 
 }
-
 ListsData = JSON.parse(localStorage.getItem('ListData'))
 
 
+//defining state code and names:
+const StateData = {
+	"MA": "Massachusetts",
+	"MN": "Minnesota",
+	"MT": "Montana",
+	"ND": "North Dakota",
+	"HI": "Hawaii",
+	"ID": "Idaho",
+	"WA": "Washington",
+	"AZ": "Arizona",
+	"CA": "California",
+	"CO": "Colorado",
+	"NV": "Nevada",
+	"NM": "New Mexico",
+	"OR": "Oregon",
+	"UT": "Utah",
+	"WY": "Wyoming",
+	"AR": "Arkansas",
+	"IA": "Iowa",
+	"KS": "Kansas",
+	"MO": "Missouri",
+	"NE": "Nebraska",
+	"OK": "Oklahoma",
+	"SD": "South Dakota",
+	"LA": "Louisiana",
+	"TX": "Texas",
+	"CT": "Connecticut",
+	"NH": "New Hampshire",
+	"RI": "Rhode Island",
+	"VT": "Vermont",
+	"AL": "Alabama",
+	"FL": "Florida",
+	"GA": "Georgia",
+	"MS": "Mississippi",
+	"SC": "South Carolina",
+	"IL": "Illinois",
+	"IN": "Indiana",
+	"KY": "Kentucky",
+	"NC": "North Carolina",
+	"OH": "Ohio",
+	"TN": "Tennessee",
+	"VA": "Virginia",
+	"WI": "Wisconsin",
+	"WV": "West Virginia",
+	"DE": "Delaware",
+	"DC": "District of Columbia",
+	"MD": "Maryland",
+	"NJ": "New Jersey",
+	"NY": "New York",
+	"PA": "Pennsylvania",
+	"ME": "Maine",
+	"MI": "Michigan",
+	"AK": "Alaska"
+}
+
+
+//showing all the names of the states
+
+var UlAllTag = document.getElementById('stateNamesUL');
+
+for (const stateCode in StateData) {
+    const stateName = StateData[stateCode];
+    const li = document.createElement("li");
+    li.textContent = stateName;
+    UlAllTag.appendChild(li);
+}
+
+
+//handeling side button clicks
 var showingColors = []
 function SideButtonsClickHanlder(n){
     var clickedButton = document.getElementById('sidebtn-'+n)
@@ -56,8 +124,8 @@ function SideButtonsClickHanlder(n){
 //update the list:
 function AddStatesToList(){
     var listID = document.getElementById('ListIdInput').value;
-    var StateNames = document.getElementById('StatesToAddInput').value
-    var StateNamesArray = StateNames.split(',').map(name => name.trim());
+    var StateNames = document.getElementById('StatesToAddInput').value;
+    var StateNamesArray = StateNames.split(/\s*,\s*/);
     var StateCodesArray = []
 
     var nonFoundStates = []
@@ -110,6 +178,7 @@ function AddStatesToList(){
                 ListsData[listID-1]['states'].length = 0
                 ListsData[listID-1]['states'].push(StateCodesArray)
                 localStorage.setItem('ListData',JSON.stringify(ListsData))
+                location.reload()
             }
             
 
@@ -216,61 +285,46 @@ function POPUP_MSG_REMOVE(n,tm)
     }, tm);
 }
 
-//defining state code and names:
-const StateData = {
-	"MA": "Massachusetts",
-	"MN": "Minnesota",
-	"MT": "Montana",
-	"ND": "North Dakota",
-	"HI": "Hawaii",
-	"ID": "Idaho",
-	"WA": "Washington",
-	"AZ": "Arizona",
-	"CA": "California",
-	"CO": "Colorado",
-	"NV": "Nevada",
-	"NM": "New Mexico",
-	"OR": "Oregon",
-	"UT": "Utah",
-	"WY": "Wyoming",
-	"AR": "Arkansas",
-	"IA": "Iowa",
-	"KS": "Kansas",
-	"MO": "Missouri",
-	"NE": "Nebraska",
-	"OK": "Oklahoma",
-	"SD": "South Dakota",
-	"LA": "Louisiana",
-	"TX": "Texas",
-	"CT": "Connecticut",
-	"NH": "New Hampshire",
-	"RI": "Rhode Island",
-	"VT": "Vermont",
-	"AL": "Alabama",
-	"FL": "Florida",
-	"GA": "Georgia",
-	"MS": "Mississippi",
-	"SC": "South Carolina",
-	"IL": "Illinois",
-	"IN": "Indiana",
-	"KY": "Kentucky",
-	"NC": "North Carolina",
-	"OH": "Ohio",
-	"TN": "Tennessee",
-	"VA": "Virginia",
-	"WI": "Wisconsin",
-	"WV": "West Virginia",
-	"DE": "Delaware",
-	"DC": "District of Columbia",
-	"MD": "Maryland",
-	"NJ": "New Jersey",
-	"NY": "New York",
-	"PA": "Pennsylvania",
-	"ME": "Maine",
-	"MI": "Michigan",
-	"AK": "Alaska"
+
+//show all the lists and items in them:
+ShowAllLists()
+function ShowAllLists()
+{
+    var container = document.getElementById('AllListsContainer');
+
+    var i = 1;
+    ListsData.forEach(list=>{
+        let div = document.createElement('div');
+        var html = `
+            <h5>list ${i} : </h5> 
+        `
+
+        var currentListdata = ListsData[i-1]['states'][0]
+        if(currentListdata == undefined){
+            html = html + " this list is empty"
+        }
+        else{
+            var k = 0;
+            currentListdata.forEach(state=>{
+                html = html + `
+                    <span>${StateData[state]} , </span>
+                `
+                k++;
+            })
+
+            html = html +`<button onclick="ClearList(${i-1})">clear this list(${i})</button>`
+        }
+
+        div.innerHTML = html;
+        container.appendChild(div)
+        
+        i++;
+    })
 }
 
-/*
-[{"id":1,"states":[["AK","TX"]]},{"id":2,"states":[["OK","IL"]]},{"id":3,"states":[["MT","ME"]]},{"id":4,"states":[]}]
-*/
+function ClearList(n)
+{
+    ListsData[n]['states'].length = 0;
+    localStorage.setItem('ListData',JSON.stringify(ListsData))
+    location.reload()
+}

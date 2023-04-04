@@ -15,6 +15,8 @@ body{
 .Header{
     margin-top: 20px;
     margin-bottom: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
 
 }
 
@@ -106,6 +108,8 @@ h1{
     display: flex;
     flex-wrap: wrap;
     max-width: 1200px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .AddItemsToLists h2{
@@ -189,3 +193,161 @@ h1{
   .AddItemsToLists .AddItemsToLists-button button:active {
     background-color: #d5d6d6;
   }
+
+  .AllStateNames{
+    padding: 30px;
+    border-top: 1px solid gray;
+    margin-top: 30px;
+  }
+
+  .AllStateNames span{
+    font-size: 18px;
+  }
+
+  .AllStateNames ul{
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  .AllStateNames ul li{
+    display: inline-block;
+    width: 200px;
+    margin-top: 15px;
+  }
+
+
+    .AllListItems{
+        margin: auto;
+        padding-top: 10px;
+        margin-top: 40px;
+        border-top: 1px solid gray;
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .AllListItems h2{
+        text-align: center;
+        font-size: 20px;
+        flex-basis: 100%;
+    }
+
+    .AllListItems .AllListContainer{
+        width: 100%;
+    }
+
+    .AllListItems .AllListContainer div{
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        flex-wrap: wrap;
+        font-size: 16px;
+    }
+
+    .AllListItems .AllListContainer div h5{
+        display: inline-block;
+        font-size: 20px;
+    }
+
+    .AllListItems .AllListContainer div button{
+        margin-left: auto;
+
+        color: red;
+       appearance: none;
+       background-color: white;
+       border: none;
+       outline: none;
+       cursor: pointer;
+       font-size: 15px;
+       text-decoration: underline;
+    }
+
+    .AllListItems .AllListContainer div span{
+        margin-left: 5px;
+        display: inline-block;
+    }
+
+    @media only screen and (max-width:1000px)
+    {
+        .MapPart{
+            flex-wrap: wrap;
+        }
+        .SideButtonsContainer{
+            width: 100%;
+            gap: 5px;
+            justify-content: center;
+        }
+        .SideButtonsContainer button{
+            flex-basis: 10%;
+            height: 30px;
+        }
+        .MapContainer{
+            width: 100%;
+            height: fit-content;
+        }
+        .MapContainer svg{
+            height: fit-content;
+        }
+    }
+
+    @media only screen and (max-width:700px){
+        .SideButtonsContainer{
+            gap: 2px;
+        }
+        .SideButtonsContainer button{
+            flex-basis: 16%;
+            height: 30px;
+        }
+        .AllStateNames ul{
+            margin-top: 10px;
+            font-size: 13px;
+          }
+          .AllStateNames ul li{
+            width: 160px;
+          }
+          .AllListItems .AllListContainer div{
+            font-size: 13px;
+        }
+        .AddItemsToLists .AddItemsToLists-Inputs {
+            flex-wrap: wrap;
+        }
+        .AddItemsToLists .AddItemsToLists-Inputs .AddInputs_txt{
+            flex-basis: 100%;
+        }
+        .AddItemsToLists .AddItemsToLists-Inputs .AddInputs_num{
+            margin: auto;
+        }
+        .ShowStateNameSpan{
+            font-size: 16px;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+    }
+
+    @media only screen and (max-width:500px){
+        .SideButtonsContainer{
+            gap: 2px;
+        }
+        .SideButtonsContainer button{
+            flex-basis: 19%;
+            height: 30px;
+        }
+        .AddItemsToLists .AddItemsToLists-Inputs input{
+            font-size: 15px;
+        }
+    }
+
+    @media only screen and (max-width:400px){
+        .SideButtonsContainer{
+            gap: 2px;
+        }
+        .SideButtonsContainer button{
+            flex-basis: 23%;
+            height: 30px;
+        }
+    }
