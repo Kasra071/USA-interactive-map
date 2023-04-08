@@ -102,6 +102,7 @@ function SideButtonsClickHanlder(n){
         });
 
         clickedButton.style.border = "2px black solid"
+        document.getElementById('list-'+n).style.color = "black"
 
         
         let indexShowing = showingColors.indexOf(n);
@@ -114,6 +115,8 @@ function SideButtonsClickHanlder(n){
         ListItems.forEach(state => {
             document.getElementById(state).style.fill=BGcolor
         });
+
+        document.getElementById('list-'+n).style.color = BGcolor
 
         clickedButton.style.border = "3px lime solid"
 
@@ -295,6 +298,7 @@ function ShowAllLists()
     var i = 1;
     ListsData.forEach(list=>{
         let div = document.createElement('div');
+        div.id = "list-" + i
         var html = `
             <h5>list ${i} : </h5> 
         `
